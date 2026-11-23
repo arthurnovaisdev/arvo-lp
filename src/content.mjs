@@ -12,8 +12,8 @@ export const directions = [
     lines: ['Qual é o próximo', 'passo do seu negócio?'],
   },
   {
-    id: 'manifesto', name: 'Manifesto', color: '#f5f0e7',
-    description: 'Composição tipográfica, faixas horizontais e contraste entre carvão e marfim.',
+    id: 'manifesto', name: 'Manifesto', color: '#141a16',
+    description: 'Carvão e verde, núcleo orbital animado e uma direção mais tecnológica.',
     lines: ['Estruture seu negócio', 'para lançar ou crescer.'],
   },
 ];

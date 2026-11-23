@@ -1,5 +1,6 @@
 import { mkdir, writeFile, cp, access, readFile } from 'node:fs/promises';
 import { directions, fronts, routes, pains, steps, audience, questions, instagram } from './content.mjs';
+import { renderManifesto } from './manifesto.mjs';
 
 const button = (label = 'Fale com a ARVO') => `<a class="btn" href="${instagram}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 const brand = '<span class="brand" translate="no">ARVO<span>ADVISORY</span></span>';
@@ -61,3 +62,4 @@ for (const name of ['', ...directions.map(direction => direction.id)]) {
   await writeFile(file, html);
 }
 console.log('Built three ARVO previews in dist/.');
+await writeFile('dist/manifesto/index.html', renderManifesto());
