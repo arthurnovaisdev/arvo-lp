@@ -3,5 +3,8 @@ _inputs/
 shots/
 node_modules/
 site-preview/
+.netlify/
+netlify-upload/
+arvo-netlify.zip
 edit-manifesto.mjs
 prune-content.mjs
