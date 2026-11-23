@@ -1,6 +1,6 @@
-import { fronts, steps, questions, instagram } from './content.mjs';
+import { fronts, steps, questions, instagram, whatsapp } from './content.mjs';
 
-const contact = (text = 'Fale com a ARVO') => `<a class="action" href="${instagram}" target="_blank" rel="noopener noreferrer">${text}<span aria-hidden="true">↗</span></a>`;
+const contact = (text = 'Fale com a ARVO') => `<a class="action" href="${whatsapp}" target="_blank" rel="noopener noreferrer">${text}<span aria-hidden="true">↗</span></a>`;
 
 export function renderManifesto() {
   return `<!doctype html>
@@ -20,9 +20,9 @@ export function renderManifesto() {
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
-    <a class="wordmark" href="../index.html" aria-label="ARVO, comparar prévias">ARVO<span>ADVISORY</span></a>
+    <a class="wordmark" href="#conteudo" aria-label="ARVO, voltar ao início">ARVO<span>ADVISORY</span></a>
     <nav aria-label="Navegação principal"><a href="#frentes">Atuação</a><a href="#processo">Como trabalhamos</a><a href="#sobre">A ARVO</a></nav>
-    <a class="nav-contact" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+    <a class="nav-contact" href="${whatsapp}" target="_blank" rel="noopener noreferrer">Vamos conversar <span aria-hidden="true">↗</span></a>
   </header>
   <main id="conteudo">
     <section class="hero" aria-labelledby="hero-title">
@@ -56,14 +56,14 @@ export function renderManifesto() {
     </section>
     <section class="fronts-section" id="frentes"><div class="wrap">
       <div class="section-head reveal"><div><p class="eyebrow">Da decisão à entrega</p><h2>Três frentes.<br>Um plano de trabalho.</h2></div><p>Comece por uma frente ou combine as entregas que o seu negócio precisa.</p></div>
-      <div class="services">${fronts.map((front,index)=>`<article class="service reveal" id="${front.id}"><div class="service-visual visual-${index}" aria-hidden="true">${index===0?'<div class="scan-ring"></div><div class="scan-ring small"></div><span class="scan-dot d1"></span><span class="scan-dot d2"></span><span class="scan-dot d3"></span><div class="scan-sweep"></div>':index===1?'<div class="offer-layer layer-back">Público</div><div class="offer-layer layer-middle">Proposta de valor</div><div class="offer-layer layer-front">Sua oferta<span>Formato · preço · roteiro</span></div>':'<div class="browser-demo"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-content"><div class="demo-title"></div><div class="demo-text"></div><div class="demo-text short"></div><div class="demo-button"></div><div class="demo-orb"></div></div><span class="demo-cursor">↖</span></div>'}</div><div class="service-content"><h3>${front.title}</h3><p>${front.summary}</p><ul>${front.items.map(item=>`<li>${item}</li>`).join('')}</ul><a class="service-link" href="${instagram}" target="_blank" rel="noopener noreferrer">Converse sobre ${front.title.toLowerCase()}<span aria-hidden="true">↗</span></a></div></article>`).join('')}</div>
+      <div class="services">${fronts.map((front,index)=>`<article class="service reveal" id="${front.id}"><div class="service-visual visual-${index}" aria-hidden="true">${index===0?'<div class="scan-ring"></div><div class="scan-ring small"></div><span class="scan-dot d1"></span><span class="scan-dot d2"></span><span class="scan-dot d3"></span><div class="scan-sweep"></div>':index===1?'<div class="offer-layer layer-back">Público</div><div class="offer-layer layer-middle">Proposta de valor</div><div class="offer-layer layer-front">Sua oferta<span>Formato · preço · roteiro</span></div>':'<div class="browser-demo"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-content"><div class="demo-title"></div><div class="demo-text"></div><div class="demo-text short"></div><div class="demo-button"></div><div class="demo-orb"></div></div><span class="demo-cursor">↖</span></div>'}</div><div class="service-content"><h3>${front.title}</h3><p>${front.summary}</p><ul>${front.items.map(item=>`<li>${item}</li>`).join('')}</ul><a class="service-link" href="${whatsapp}" target="_blank" rel="noopener noreferrer">Converse sobre ${front.title.toLowerCase()}<span aria-hidden="true">↗</span></a></div></article>`).join('')}</div>
       <p class="scope-note">Escopo, prazo e investimento definidos na proposta, depois da conversa inicial.</p>
     </div></section>
     <section class="process-section wrap" id="processo"><div class="process-heading reveal"><p class="eyebrow">Como a ARVO trabalha</p><h2>Clareza para decidir.<br><span class="muted">Estrutura para executar.</span></h2></div><div class="process-steps">${steps.map((step,index)=>`<article class="process-step reveal"><div class="step-track" aria-hidden="true"><span></span></div><p class="step-label">${['Entender','Planejar','Construir'][index]}</p><h3>${step.title}</h3><p>${step.text}</p></article>`).join('')}</div><div class="responsibility reveal"><span>Construímos com você.</span><p>Você participa das validações e aprova as decisões sobre a marca. A ARVO executa as entregas previstas na proposta.</p></div></section>
     <section class="statement-section"><div class="wrap"><p class="eyebrow reveal">Uma atuação conectada</p><h2 class="reveal">Estruturamos negócios.<br>Organizamos vendas.<br><span>Construímos o digital.</span></h2><div class="statement-line" aria-hidden="true"><i></i></div><p class="reveal">Estratégia, comercial e tecnologia acompanham a mesma direção.</p></div></section>
     <section class="faq-section wrap"><div class="reveal"><p class="eyebrow">Antes da primeira conversa</p><h2>Vamos esclarecer.</h2></div><div class="faq-list reveal">${questions.map(([q,a])=>`<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join('')}</div></section>
-    <section class="contact-section" id="contato"><div class="contact-orbit" aria-hidden="true"></div><div class="wrap"><p class="eyebrow reveal">Seu próximo passo</p><h2 class="reveal">O que vamos<br><span>construir juntos?</span></h2><p class="reveal">Conte em que fase seu negócio está.<br>Envie “ARVO” no direct para iniciar a conversa.</p><div class="reveal">${contact('Comece uma conversa')}</div></div></section>
+    <section class="contact-section" id="contato"><div class="contact-orbit" aria-hidden="true"></div><div class="wrap"><p class="eyebrow reveal">Seu próximo passo</p><h2 class="reveal">O que vamos<br><span>construir juntos?</span></h2><p class="reveal">Conte em que fase seu negócio está.<br>Envie “ARVO” pelo WhatsApp para iniciar a conversa.</p><div class="reveal">${contact('Comece uma conversa')}</div></div></section>
   </main>
-  <footer class="wrap"><a class="wordmark" href="#conteudo">ARVO<span>ADVISORY</span></a><p>Estratégia, comercial e tecnologia.</p><a href="../index.html">Comparar prévias</a><a href="${instagram}" target="_blank" rel="noopener noreferrer">Instagram ↗</a></footer>
+  <footer class="wrap"><a class="wordmark" href="#conteudo">ARVO<span>ADVISORY</span></a><p>Estratégia, comercial e tecnologia.</p><a href="${instagram}" target="_blank" rel="noopener noreferrer">Instagram ↗</a></footer>
 </body></html>`;
 }

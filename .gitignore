@@ -2,3 +2,6 @@
 _inputs/
 shots/
 node_modules/
+site-preview/
+edit-manifesto.mjs
+prune-content.mjs
