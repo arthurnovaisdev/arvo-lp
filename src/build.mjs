@@ -45,7 +45,9 @@ for (const name of ['word-highlight', 'pinned-chapters']) {
   const body = source.replace('export default function', 'function mount').replace(/\bexport\s+/g, '');
   mounts.push(`(() => { ${body}\n document.querySelectorAll('[data-moment="${name}"]').forEach(element => {\n mount(element, {}, {...lib, reduced: ${name === 'word-highlight' ? 'lib.reduced' : 'lib.still'}});\n element.dataset.momentMounted = '1';\n });\n})();`);
 }
-const motion = (await readFile('assets/motion/motion.js', 'utf8')).replace(/\bexport\s+/g, '');
+const motion = (await readFile('assets/motion/motion.js', 'utf8'))
+  .replace(/export default \{[^}]*\};?/g, '')
+  .replace(/\bexport\s+/g, '');
 await writeFile('dist/assets/runtime.js', `(() => {\n${motion}\n})();\n(() => {\n${libraryBundle}\n${mounts.join('\n')}\n})();`);
 for (const name of ['', ...directions.map(direction => direction.id)]) {
   const file = name ? `dist/${name}/index.html` : 'dist/index.html';

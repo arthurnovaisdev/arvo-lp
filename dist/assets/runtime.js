@@ -401,7 +401,7 @@ function init() {
 }
 /** call again after the page adds markup (a tab list, a stat, a loop) */
 const refresh = init;
-default { init, refresh };
+
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
 else init();
