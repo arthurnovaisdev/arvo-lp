@@ -1,0 +1,9 @@
+{
+  "name": "arvo-lp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "preview": "node src/serve.mjs"
+  }
+}
