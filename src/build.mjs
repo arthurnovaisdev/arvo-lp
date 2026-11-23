@@ -1,4 +1,4 @@
-import { mkdir, writeFile, cp, access } from 'node:fs/promises';
+import { mkdir, writeFile, cp, access, readFile } from 'node:fs/promises';
 import { directions, fronts, routes, pains, steps, audience, questions, instagram } from './content.mjs';
 
 const button = (label = 'Fale com a ARVO') => `<a class="btn" href="${instagram}" target="_blank" rel="noopener noreferrer">${label}</a>`;
@@ -35,4 +35,27 @@ for (const direction of directions) {
  await writeFile(`dist/${direction.id}/index.html`,html);
 }
 await writeFile('dist/index.html',`${head('Três direções visuais','#f4efe4','')}<body class="gallery"><header class="wrap gallery-header">${brand}<span>Prévias da landing page</span></header><main class="wrap"><p class="eyebrow">Uma marca. Três direções.</p><h1>O próximo passo<br>da <em>ARVO.</em></h1><p class="gallery-lead">Explore as três propostas de composição, tipografia e movimento.</p><div class="preview-grid">${directions.map(d=>`<a class="preview card preview-${d.id}" href="${d.id}/"><div class="mini"><span>ARVO</span><strong>${d.id==='rotas'?'Qual é o próximo passo?':d.id==='manifesto'?'ESTRUTURE. LANCE. CRESÇA.':'Estruture seu negócio.'}</strong>${hasLogo ? '<img src="assets/brand/logo.jpeg" alt="" width="640" height="640">' : ""}</div><div class="preview-info"><h2>${d.name}</h2><p>${d.description}</p><span class="text-link">Abrir prévia</span></div></a>`).join('')}</div><p class="preview-note">O contato das prévias usa @arvo.advisory, conforme a identidade enviada. Conta oficial e dados institucionais sujeitos à confirmação.</p></main><script type="module" src="assets/motion/motion.js"></script></body></html>`);
+// Bundle the supplied motion modules so previews also work when opened from disk.
+const library = await readFile('assets/moments/lib.js', 'utf8');
+const exports = [...library.matchAll(/export\s+(?:const|function)\s+(\w+)/g)].map(match => match[1]);
+const libraryBundle = `const lib = (() => {\n${library.replace(/\bexport\s+/g, '')}\nreturn {${exports.join(',')}};\n})();`;
+const mounts = [];
+for (const name of ['word-highlight', 'pinned-chapters']) {
+  const source = await readFile(`assets/moments/${name}/moment.js`, 'utf8');
+  const body = source.replace('export default function', 'function mount').replace(/\bexport\s+/g, '');
+  mounts.push(`(() => { ${body}\n document.querySelectorAll('[data-moment="${name}"]').forEach(element => {\n mount(element, {}, {...lib, reduced: ${name === 'word-highlight' ? 'lib.reduced' : 'lib.still'}});\n element.dataset.momentMounted = '1';\n });\n})();`);
+}
+const motion = (await readFile('assets/motion/motion.js', 'utf8')).replace(/\bexport\s+/g, '');
+await writeFile('dist/assets/runtime.js', `(() => {\n${motion}\n})();\n(() => {\n${libraryBundle}\n${mounts.join('\n')}\n})();`);
+for (const name of ['', ...directions.map(direction => direction.id)]) {
+  const file = name ? `dist/${name}/index.html` : 'dist/index.html';
+  const prefix = name ? '../' : '';
+  let html = await readFile(file, 'utf8');
+  html = html.replace(/<script type="module"[^>]*><\/script>/g, '');
+  html = html.replace('</head>', `<link rel="stylesheet" href="${prefix}assets/moments/word-highlight/moment.css"><link rel="stylesheet" href="${prefix}assets/moments/pinned-chapters/moment.css"></head>`);
+  html = html.replace('</body>', `<script defer src="${prefix}assets/runtime.js"></script></body>`);
+  html = html.replaceAll('href="../"', 'href="../index.html"');
+  for (const direction of directions) html = html.replaceAll(`href="${direction.id}/"`, `href="${direction.id}/index.html"`);
+  await writeFile(file, html);
+}
 console.log('Built three ARVO previews in dist/.');
