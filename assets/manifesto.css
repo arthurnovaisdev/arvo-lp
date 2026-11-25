@@ -137,10 +137,20 @@ nav a:hover {
   
 }
 .nav-contact span,.action span,.quiet-link span,.service-link span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   transition: transform 220ms;
   
 }
+.icon {
+  display: block;
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  overflow: visible;
+}
+.icon-motion { width: 17px; height: 17px; }
+.footer-icon { display: inline-flex; vertical-align: middle; margin-left: .25em; }
 .nav-contact:hover span,.action:hover span,.service-link:hover span {
   transform: translate(3px,-3px);
   
@@ -470,9 +480,12 @@ h1 {
   
 }
 .ticker-track i {
-  font-style: normal;
-  font-size: 26px;
-  color: #82975e;
+  display: block;
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border: 1px solid #a9b997;
+  transform: rotate(45deg);
   
 }
 h2 {
@@ -817,8 +830,11 @@ h2 {
   position: absolute;
   bottom: 23px;
   left: 79px;
-  font-size: 28px;
-  color: #31492c;
+  width: 23px;
+  height: 29px;
+  background: #31492c;
+  clip-path: polygon(0 0, 0 100%, 7px 76%, 14px 91%, 18px 89%, 11px 72%, 23px 72%);
+  filter: drop-shadow(1px 1px 0 #eef1dd);
   animation: cursor-travel 4s ease-in-out infinite;
   
 }

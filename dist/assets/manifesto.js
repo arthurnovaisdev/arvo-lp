@@ -13,7 +13,8 @@
     root.classList.toggle('motion-paused', paused);
     toggle.setAttribute('aria-pressed', String(paused));
     toggle.disabled = preference.matches;
-    toggle.innerHTML = paused ? 'Ativar movimento <span aria-hidden="true">▷</span>' : 'Pausar movimento <span aria-hidden="true">Ⅱ</span>';
+    const motionIcon = paused ? '<path d="m9 5 10 7-10 7z"/>' : '<path d="M8 5v14M16 5v14"/>';
+    toggle.innerHTML = `${paused ? 'Ativar' : 'Pausar'} movimento <span aria-hidden="true"><svg class="icon icon-motion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">${motionIcon}</svg></span>`;
     if (preference.matches) toggle.textContent = 'Movimento reduzido';
     if (paused) {
       ecosystem.style.transform = '';
