@@ -21,7 +21,7 @@ export function renderManifesto() {
   <meta property="og:url" content="https://arvo-advisory.netlify.app/">
   <meta property="og:title" content="ARVO — Estratégia que ganha forma">
   <meta property="og:description" content="Estratégia, comercial e tecnologia para o próximo passo do seu negócio.">
-  <meta property="og:image" content="https://arvo-advisory.netlify.app/assets/brand/social-preview.png">
+  <meta property="og:image" content="https://arvo-advisory.netlify.app/assets/brand/social-preview.png?v=2">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@ export function renderManifesto() {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ARVO — Estratégia que ganha forma">
   <meta name="twitter:description" content="Estratégia, comercial e tecnologia para o próximo passo do seu negócio.">
-  <meta name="twitter:image" content="https://arvo-advisory.netlify.app/assets/brand/social-preview.png">
+  <meta name="twitter:image" content="https://arvo-advisory.netlify.app/assets/brand/social-preview.png?v=2">
   <link rel="icon" type="image/png" href="../assets/brand/tree.png">
   <link rel="apple-touch-icon" href="../assets/brand/tree.png">
   <link rel="stylesheet" href="../assets/manifesto.css">
